@@ -23,7 +23,51 @@ composer require codezero/php-url-builder
 
 ## 📘 Usage
 
+You create a new `UrlBuilder` instance and pass it the URL you want to manipulate:
 
+```php
+$urlBuilder = new \CodeZero\UrlBuilder\UrlBuilder('http://www.example.com/abc/def?foo=bar');
+// or...
+$urlBuilder = \CodeZero\UrlBuilder\UrlBuilder::make('http://www.example.com/abc/def?foo=bar');
+```
+
+When you are done, you can build the new URL:
+
+```php
+$url = $urlBuilder->build(); //=> Returns 'http://www.example.com/abc/def?foo=bar'
+$url = $urlBuilder->build(false); //=> Returns '/abc/def?foo=bar'
+```
+
+### Updating URL Parts
+
+There are setters and getters for the different URL parts:
+
+```php
+$urlBuilder->setScheme('https');
+$urlBuilder->getScheme(); //=> Returns 'https'
+
+$urlBuilder->setHost('www.example.com');
+$urlBuilder->getHost(); //=> Returns 'www.example.com'
+
+$urlBuilder->setPort(8000);
+$urlBuilder->getPort(); //=> Returns '8000'
+
+$urlBuilder->setPath('/abc/def');
+$urlBuilder->getPath(); //=> Returns '/abc/def'
+$urlBuilder->getSlugs(); //=> Returns ['abc', 'def']
+
+$urlBuilder->setSlugs(['abc', 'def']);
+$urlBuilder->getPath(); //=> Returns '/abc/def'
+$urlBuilder->getSlugs(); //=> Returns ['abc', 'def']
+
+$urlBuilder->setQueryString('foo=bar');
+$urlBuilder->getQueryString(); //=> Returns 'foo=bar'
+$urlBuilder->getQuery(); //=> Returns ['foo' => 'bar']
+
+$urlBuilder->setQuery(['foo' => 'bar']);
+$urlBuilder->getQueryString(); //=> Returns 'foo=bar'
+$urlBuilder->getQuery(); //=> Returns ['foo' => 'bar']
+```
 
 ## 🚧 Testing
 
