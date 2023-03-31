@@ -17,6 +17,15 @@ class UrlBuilderTest extends TestCase
     }
 
     /** @test */
+    public function it_has_a_static_method_to_get_a_new_url_builder()
+    {
+        $urlBuilder = UrlBuilder::make('http://www.example.com:8000/abc/def?ref=testcase&foo=bar');
+
+        $this->assertEquals('http://www.example.com:8000/abc/def?ref=testcase&foo=bar', $urlBuilder->build());
+        $this->assertEquals('/abc/def?ref=testcase&foo=bar', $urlBuilder->build(false));
+    }
+
+    /** @test */
     public function it_gets_url_parts()
     {
         $urlBuilder = new UrlBuilder('http://www.example.com:8000/abc/def?ref=testcase&foo=bar');
